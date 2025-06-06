@@ -98,19 +98,19 @@ export default function InviteMemberModal() {
   const [form] = Form.useForm();
 
   const handleOk = async () => {
-  // reset form value
-  form.resetFields();
-  setValue([]);
+    // reset form value
+    form.resetFields();
+    setValue([]);
 
-  // update members in current room
-  const roomRef = doc(db, 'rooms', selectedRoomId); // ✅ Modular syntax
+    // update members in current room
+    const roomRef = doc(db, 'rooms', selectedRoomId); // ✅ Modular syntax
 
-  await updateDoc(roomRef, {
-    members: [...selectedRoom.members, ...value.map((val) => val.value)],
-  });
+    await updateDoc(roomRef, {
+      members: [...selectedRoom.members, ...value.map((val) => val.value)],
+    });
 
-  setIsInviteMemberVisible(false);
-};
+    setIsInviteMemberVisible(false);
+  };
 
 
   const handleCancel = () => {
@@ -124,7 +124,7 @@ export default function InviteMemberModal() {
   return (
     <div>
       <Modal
-        title='Mời thêm thành viên'
+        title='Thêm thành viên'
         visible={isInviteMemberVisible}
         onOk={handleOk}
         onCancel={handleCancel}
