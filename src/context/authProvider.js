@@ -4,10 +4,16 @@ import { auth } from '../firebase/config';
 import { Spin } from 'antd';
 
 // Tạo context để chia sẻ thông tin user toàn app
-export const AuthContext = createContext();
+const defaultUser = {
+    displayName: '',
+    photoURL: '',
+    uid: '',
+    email: ''
 
+  }
+export const AuthContext = createContext();
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);        // Thông tin user đăng nhập
+  const [user, setUser] = useState(defaultUser);        // Thông tin user đăng nhập
   const [isLoading, setIsLoading] = useState(true); // Đang kiểm tra đăng nhập
   const navigate = useNavigate();
 
@@ -29,7 +35,7 @@ export default function AuthProvider({ children }) {
         }
       } else {
         // Chưa đăng nhập
-        setUser(null);
+        setUser(defaultUser);
         setIsLoading(false);
 
         if (window.location.pathname !== '/login') {
